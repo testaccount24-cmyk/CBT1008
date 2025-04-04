@@ -1,0 +1,17 @@
+++USERMOD(ASL0001) .
+++VER(Z038) FMID(HIF7P02)
+       /*
+    Description:
+       This MOD will change the names of the DDNAMES used by ISPPREP
+       from INDSNAM and OUTDSNAM to ZPREPIN and ZPREPOUT.
+       If this change is put onto the systems then the panel ISPPREPA
+       must have the names changed to match these.
+
+       */ .
+++ZAP(ISPPREP)  .
+  NAME ISPPREP
+ VER 3650 C9D5C4E2D5C1D440           INDSNAM
+ VER 3660 D6E4E3C4E2D5C1D4           OUTDSNAM
+ REP 3650 E9D7D9C5D7C9D540           ZPREPIN
+ REP 3660 E9D7D9C5D7D6E4E3           ZPREPOUT
+ IDRDATA ASL0001

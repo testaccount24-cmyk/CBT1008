@@ -1,0 +1,24 @@
+//SMPE     JOB
+//PROCLIB JCLLIB ORDER=your.ispprep.jcl
+//REJECT    EXEC SMPEPROC
+//SMPPTFIN   DD   DUMMY
+//SMPCNTL   DD *
+ SET BOUNDARY(your.global.zone) .
+ REJECT S(ASL0001) .
+ REJECT S(ASL0002) .
+//STEP1     EXEC SMPEPROC,COND=(13,LT),
+//          PTFDSN='your.ispprep.jcl',
+//          PTFMEM=ASL0001
+//SMPCNTL   DD *
+ SET BOUNDARY(your.global.zone) .
+ RECEIVE S(ASL0001) SYSMOD .
+ SET BOUNDADY(your.target.zone) .
+ APPLY S(ASL0001) .
+//STEP2     EXEC SMPEPROC,COND=(13,LT),
+//          PTFDSN='your.ispprep.jcl',
+//          PTFMEM=ASL0002
+//SMPCNTL   DD *
+ SET BOUNDARY(your.global.zone) .
+ RECEIVE S(ASL0002) SYSMOD .
+ SET BOUNDADY(your.target.zone) .
+ APPLY S(ASL0002) CHECK .

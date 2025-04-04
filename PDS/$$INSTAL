@@ -1,0 +1,101 @@
+        Finalising The Installation of the ISPPREP Modification
+        -------------------------------------------------------
+
+Once you have RECEIVEd the 3 datasets that comprise the ISPPREP
+modification there are some steps that need to be taken in order to
+complete the installation.
+
+These steps depend on the individual site requirements and/or policies
+as to how to proceed.
+
+The steps required are:
+
+1) Backup the Target Libraries (optional but recommened)
+   ---------------------------
+
+   Before making any changes it is recommended that you take backups.
+   If you don't want to backup the full library then you could just back
+   up the two members that get changed (ISPPREPA panel, and the ISPPREP
+   load module).
+
+2) Decide how to Implement the Modifications (Required)
+   -----------------------------------------
+
+   The sample jobs provided offer different methods for performing
+   the modifications.
+
+         a) Using SMP/E USERMODS.
+   or    b) Using SUPERZAP and IEBCOPY to zap your existing ISPPREP
+            and IEBCOPY to copy the ISPPREPA panel to your own library.
+   or    c) Simply concatenate the LOADLIB and ISPPLIB libraries ahead
+            of your production libraries.
+
+3) Using SMP/E (Optional)
+   -----------
+
+    If you chose to install the modifications using SMP/E the sample
+    jobs in the JCL library are provided but they will need to be
+    tailored for your site.
+
+         a) Change the SMPEPROC member to point to your SMP/E CSI.
+         b) Change the SMPEJCL to point to point to your GLOBAL and
+            TARGET zone names.
+         c) Change the SMPEJCL member JCLLIB card to point to library
+            containing the SMPEPROC procedure.
+         d) Change the SMPEJCL member so that the PTFDSN points to the
+            library contain the USERMODs ASL0001 and ASL0002.
+         e) Change the ASL0002 member to point the INDD statement to
+            the library containing the ISPPREPA panel distributed with
+            this modification.
+         f) Change the ASL0002 member to point the OUTDD statement to
+            the target library for the ISPPREPA panel.
+         g) Modify the JOBCARD in SMPEJCL to meet your site standards.
+         h) Submit the SMPEJCL job.
+
+4) AMASPZAP & IEBCOPY Install (Optional)
+   --------------------------
+
+    If you chose to install the modifications using the SUPERZAP and
+    IEBCOPY method you will need to tailor the jobs to meet your site
+    standards.
+
+         a) Change the ZAP member in the JCL library to point to your
+            target load module library. If you want to change our
+            default names from ZPREPIN & ZPREPOUT this is where you
+            would do that. If you do change the names you will have to
+            perform a global change in the ISPPREPA panel to reflect
+            those changes.
+         b) Change the IEBCOPY member in the JCL library to point to
+            your target panel library.
+         c) Modify the JOBCARDS in the ZAP and IEBCOPY members to adhere
+            to your site standards
+         h) Submit the ZAP and IEBCOPY jobs.
+
+5) Just using IEBCOPY (Optional)
+   ------------------
+
+    If you chose to install the modifications using just IEBCOPY then
+    the supplied member IEBCOPY2 will copy the required members from
+    the distributed panel and load libraries into your chosen libraries.
+
+    The IEBCOPY2 job will need to be tailored to meet your site
+    standards.
+
+         a) Change the IEBCOPY2 to point to your target panel and load
+            libraries. The OUTPANL should be the panel library to be
+            used. OUTLOAD is for the load module
+         b) Change the IEBCOPY2 to point to the distribution libraries
+            created by the UNPACK process. INPANEL should point to be
+            distributed panel library and INLOAD to the distributed
+            load library.
+         c) Modify the JOBCARD in the IEBCOPY2 member to adhere to your
+            site standards
+         h) Submit IEBCOPY2 job.
+
+6) Refresh LLA (May be required)
+   -----------
+
+    Depending on where the ISPPREP module is located at your site you
+    may need to refresh LLA in order to pickup the changes.
+
+    That concludes the modification installation.

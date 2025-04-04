@@ -1,0 +1,29 @@
+*----------------------------------------------------------------------*
+|  Member  | Decription                                                |
+*----------------------------------------------------------------------*
+| $$$INDEX | This member.                                              |
+*----------------------------------------------------------------------*
+| $$INSTAL | Description of how to implement this fix for saving       |
+|          | the input and output datasets used for ISPPREP.           |
+*----------------------------------------------------------------------*
+| ISPPLIB  | This is the dataset that contains the modified ISPF panel |
+|          | ISPPREPA. If this panel is used then the ZAP to ISPPREP   |
+|          | MUST also be run as the names of the input and output     |
+|          | datasets have been change to ZPREPIN and ZPREPOUT in this |
+|          | panel. This must match the values in the load module,     |
+|          | ISPPREP. (This is in the loadlib member of this PDS.)     |
+*----------------------------------------------------------------------*
+| JCL      | This is the library containing all the install jobs for   |
+|          | the modification. It contains jobs that will need to be   |
+|          | tailored to your site standards and the datasets to be    |
+|          | used.                                                     |
+*----------------------------------------------------------------------*
+| LOADLIB  | This is the library containng the zapped ISPPREP module.  |
+|          | This has the names changed from INDSNAM and OUTDSNAM to   |
+|          | ZPREPIN and ZPREPOUT.                                     |
+*----------------------------------------------------------------------*
+| README   | This member explains how to unpack the datasets.          |
+*----------------------------------------------------------------------*
+| UNPACK   | This is the main member that RECEIVE's the needed datasets|
+|          | for installing the ISPPREP modifications.                 |
+*----------------------------------------------------------------------*

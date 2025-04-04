@@ -1,0 +1,20 @@
+++USERMOD(ASL0002) .
+++VER(Z038) FMID(HIF7P02) PRE(ASL0001) .
+       /*
+    Description:
+       This MOD will copy the panel ISPPREPA from the downloaded
+       Abbydale Systems panel library into your chosen target library.
+       Change the names on the INDD and OUTDD to your downloaded and
+       target libraries before APPLYing this fix.
+
+       */ .
+++JCLIN .
+//SMPJCLIN DD DATA,DLM='##'
+//IEBCOPY  EXEC PGM=IEBCOPY
+//SYSPRINT DD SYSOUT=*
+//INDD     DD DISP=SHR,DSN=your.ispprep.library
+//OUTDD    DD DISP=SHR,DSN=your.ispplib
+//SYSIN    DD *
+ COPY INDD=INDD,OUTDD=OUTDD
+ S M=((ISPPREPA,,R))
+##
